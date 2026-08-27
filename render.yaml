@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: josh-vibes-telegram-assistant
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: BOT_MODE
+        value: polling
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: OWNER_TELEGRAM_ID
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_BASE_URL
+        value: https://api.openai.com/v1
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: DATABASE_PATH
+        value: /var/data/josh-vibes.sqlite
+    disk:
+      name: josh-vibes-data
+      mountPath: /var/data
+      sizeGB: 1
